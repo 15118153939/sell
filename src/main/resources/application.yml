@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: Mingliang520
+    url: jdbc:mysql://localhost/sell?characterEncoding=utf-8&userSSL=false
+#    characterEncoding=utf-8&userSSL=false 防止中文乱码，以及协议安全性问题
+#    url: jdbc:mysql://192.168.1.114/sell?characterEncoding=utf-8&userSSL=false
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  context-path: /sell
+  port: 8083
+#logging:
+#  pattern:
+#    console: "%d -%msg%n"
+#  file: /sell.log
+#  level:
+#    com.lv.sell.LoggerTest: debug
+##  path: /lvlog/
