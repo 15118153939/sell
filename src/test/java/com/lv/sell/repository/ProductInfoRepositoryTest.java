@@ -43,9 +43,9 @@ public class ProductInfoRepositoryTest {
 //       }
 
         ProductInfo productInfo= new ProductInfo();
-        productInfo.setProductId("123456");
-        productInfo.setProductName("瘦肉粥");
-        productInfo.setProductPrice(new BigDecimal(8.5));
+        productInfo.setProductId("1234569");
+        productInfo.setProductName("可乐鸡翅");
+        productInfo.setProductPrice(new BigDecimal(28.5));
         productInfo.setProductDescription("这个很好喝");
         productInfo.setProductIcon("http://xxx.jpg");
         productInfo.setProductStatus(0);

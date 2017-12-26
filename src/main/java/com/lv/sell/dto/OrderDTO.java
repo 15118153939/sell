@@ -1,32 +1,28 @@
-package com.lv.sell.dataobject;
+package com.lv.sell.dto;
 
+import com.lv.sell.dataobject.OrderDetail;
 import com.lv.sell.enums.OrderStatusEnum;
 import com.lv.sell.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @Author lvmingliang_glut@163.com
- * @Date 2017/12/25 12:33
+ * @Date 2017/12/25 19:46
  * @Description
- *
- *
+ * 数据传输对象DTO
  **/
-@Entity
+
 @Data
-@DynamicUpdate
-public class OrderMaster {
+public class OrderDTO {
+
     /***
      * 订单ID
      */
-    @Id
     private String orderId;
 
     /***
@@ -56,12 +52,12 @@ public class OrderMaster {
     /**
      * 订单状态：默认是0 新下单
      */
-    private Integer orderStatus = OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
 
     /**
      * 支付状态：默认0，等待支付
      */
-    private Integer payStatus = PayStatusEnum.WAIT.getCode();
+    private Integer payStatu;
 
     /***
      * 等待时间
@@ -72,5 +68,7 @@ public class OrderMaster {
      */
     private Date updateTime;
 
+
+    List<OrderDetail> orderDetailList;
 
 }

@@ -26,7 +26,7 @@ public class OrderDetail {
     /***
      * 商品ID
      */
-    private String prductId;
+    private String productId;
 
     /**
      * 商品名称
