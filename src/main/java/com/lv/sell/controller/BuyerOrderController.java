@@ -105,7 +105,7 @@ public class BuyerOrderController {
                            @RequestParam("orderId") String orderId) {
 
 //        todo 不安全的做法，改进
-        OrderDTO orderDTO = buyerService.cancelOrder(openid,orderId)
+        OrderDTO orderDTO = buyerService.cancelOrder(openid,orderId);
         return ResultVOUtil.success();
     }
 }
