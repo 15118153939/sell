@@ -2,11 +2,14 @@ package com.lv.sell.service.impl;
 
 import com.lv.sell.dataobject.OrderDetail;
 import com.lv.sell.dto.OrderDTO;
+import com.lv.sell.enums.OrderStatusEnum;
+import com.lv.sell.enums.PayStatusEnum;
 import com.lv.sell.repository.OrderDetailRepository;
 import com.lv.sell.repository.OrderMasterRepository;
 import com.lv.sell.service.OrderService;
 import com.lv.sell.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,7 @@ import static org.junit.Assert.*;
 public class OrderServiceImplTest {
 
     private final String BUYER_OPENID ="110010";
+    private final String ORDER_ID="1514258346789966646";
 
     @Autowired
     private ProductService productService;
@@ -45,6 +49,7 @@ public class OrderServiceImplTest {
 
     @Autowired
     private OrderService orderService;
+
 
     @Test
     public void create() throws Exception {
@@ -73,6 +78,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() throws Exception {
+
+        OrderDTO result= orderService.findOne(ORDER_ID);
+        log.info("[查询单个订单]result={}",result);
     }
 
     @Test
@@ -81,19 +89,34 @@ public class OrderServiceImplTest {
 
        Page<OrderDTO> page = orderService.findList(BUYER_OPENID,request);
 
+        System.out.println(page.toString());
+        Assert.assertNotEquals(0,page.getTotalElements());
         System.out.println(page);
     }
 
     @Test
     public void cancel() throws Exception {
+        OrderDTO orderDTO= orderService.findOne(ORDER_ID);
+
+        OrderDTO result =orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),result.getOrderStatus());
     }
 
     @Test
     public void finish() throws Exception {
+        OrderDTO orderDTO= orderService.findOne(ORDER_ID);
+
+        OrderDTO result =orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),result.getOrderStatus());
+
     }
 
     @Test
     public void paid() throws Exception {
+        OrderDTO orderDTO= orderService.findOne(ORDER_ID);
+
+        OrderDTO result =orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
     }
 
 }

@@ -24,6 +24,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoRepository repository;
+
     @Override
     public ProductInfo findOne(String productId) {
         return repository.findOne(productId);
@@ -49,9 +50,22 @@ public class ProductServiceImpl implements ProductService {
         return repository.findAll();
     }
 
+    /***
+     *
+     * @param cartDTOList
+     */
     @Override
+    @Transactional
     public void increaseStock(List<CartDTO> cartDTOList) {
-
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo=repository.findOne(cartDTO.getProductId());
+            if (productInfo == null) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+//            增加库存
+            Integer result = productInfo.getProductStock() + cartDTO.getProductQuantity();
+            repository.save(productInfo);
+        }
     }
 
     /***
@@ -62,17 +76,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void decreaseStock(List<CartDTO> cartDTOList) {
 //减少库存
-        for (CartDTO cartDTO:cartDTOList){
+        for (CartDTO cartDTO : cartDTOList) {
 //            1：查询商品
-            ProductInfo productInfo =repository.findOne(cartDTO.getProductId());
+            ProductInfo productInfo = repository.findOne(cartDTO.getProductId());
 //2：如果商品不存在，则抛异常
-            if (productInfo==null){
+            if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
             }
 //3库存 - 购物车的购买数量
             Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
 //4：如果<0,就是购买数量超过库存，则抛库存错误异常
-            if (result<0){
+            if (result < 0) {
                 throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
 //            5:设置商品减少后的库存

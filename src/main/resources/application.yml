@@ -6,7 +6,8 @@ spring:
     url: jdbc:mysql://localhost/sell?characterEncoding=utf-8&userSSL=false
 #    characterEncoding=utf-8&userSSL=false 防止中文乱码，以及协议安全性问题
 #    url: jdbc:mysql://192.168.1.114/sell?characterEncoding=utf-8&userSSL=false
-
+  jackson:
+    default-property-inclusion: non_null
   jpa:
     show-sql: true
     hibernate:

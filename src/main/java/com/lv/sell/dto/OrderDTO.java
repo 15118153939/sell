@@ -1,24 +1,31 @@
 package com.lv.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lv.sell.dataobject.OrderDetail;
 import com.lv.sell.enums.OrderStatusEnum;
 import com.lv.sell.enums.PayStatusEnum;
+import com.lv.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @Author lvmingliang_glut@163.com
  * @Date 2017/12/25 19:46
- * @Description
- * 数据传输对象DTO
+ * @Description 数据传输对象DTO
  **/
 
 @Data
+//@JsonSerialize include = JsonSerialize.Inclusion.NON_NULL
+//@JsonInclude(JsonInclude.Include.NON_NULL)  //如果有熟悉为null,则返回的json去掉此属性吧。
 public class OrderDTO {
+
 
     /***
      * 订单ID
@@ -57,18 +64,20 @@ public class OrderDTO {
     /**
      * 支付状态：默认0，等待支付
      */
-    private Integer payStatu;
+    private Integer payStatus;
 
     /***
-     * 等待时间
+     * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
     /***
      * 更新时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
 
-    List<OrderDetail> orderDetailList;
+    List<OrderDetail> orderDetailList = new ArrayList<>();
 
 }

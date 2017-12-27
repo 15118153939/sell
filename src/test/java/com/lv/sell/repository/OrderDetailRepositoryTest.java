@@ -28,9 +28,15 @@ public class OrderDetailRepositoryTest {
 
     @Test
     public void findByOrderId() throws Exception {
-        List<OrderDetail> orderDetailsList = repository.findByOrderId("1115");
-        Assert.assertNotEquals(0,orderDetailsList.size());
-        repository.findAll();
+        List<OrderDetail> orderDetailsList = repository.findByOrderId("1514211912917356065");
+
+        for (int i = 0; i < orderDetailsList.size(); i++) {
+            System.out.println(orderDetailsList.get(i).toString());
+        }
+
+        System.out.println("-------"+orderDetailsList.size());
+//        Assert.assertNotEquals(0,orderDetailsList.size());
+//        repository.findAll();
     }
 
     @Test
