@@ -50,7 +50,7 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductIcon("http://xxx.jpg");
         productInfo.setProductStatus(0);
         productInfo.setProductStock(100);
-        productInfo.setCategoryType(2);
+        productInfo.setCategoryType(3);
         ProductInfo result = repository.save(productInfo);
 
 

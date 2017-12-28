@@ -38,17 +38,17 @@ public class ProductCategoryRepositoryTest {
     @Test
     public void addOne() {
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("numinous");
-        productCategory.setCategoryTyep(3);
+        productCategory.setCategoryName("宅男必备");
+        productCategory.setCategoryTyep(4);
         repository.save(productCategory);
     }
 
     @Test
     public void updateOneTest() {
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryId(1);
-        productCategory.setCategoryName("男生最爱666");
-        productCategory.setCategoryTyep(2);
+        productCategory.setCategoryId(2);
+        productCategory.setCategoryName("少女系列");
+        productCategory.setCategoryTyep(3);
         ProductCategory category = repository.save(productCategory);
 
         Assert.assertNotNull(category);

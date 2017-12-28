@@ -14,7 +14,10 @@ spring:
       ddl-auto: update
 server:
   context-path: /sell
-  port: 8083
+  port: 8080
+wechat:
+  mpAppId: wx6e4afca43ca02334
+  mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
 #logging:
 #  pattern:
 #    console: "%d -%msg%n"
