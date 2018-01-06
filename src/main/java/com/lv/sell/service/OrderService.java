@@ -44,4 +44,11 @@ Page<OrderDTO> findList(String buyerOpenId,Pageable pageable);
      * 支付订单
      */
     OrderDTO paid(OrderDTO orderDTO);
+
+    /**
+     * 查询订单，只要传入分页
+     * @param pageable
+     * @return
+     */
+    Page<OrderDTO> findList(Pageable pageable);
 }

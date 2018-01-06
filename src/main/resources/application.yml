@@ -1,4 +1,6 @@
 spring:
+  freemarker:
+    cache: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
@@ -18,6 +20,12 @@ server:
 wechat:
   mpAppId: wx6e4afca43ca02334
   mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
+#wechat:
+#  mpAppId: wx6e4afca43ca02334
+#  mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
+#  mchId: 1409146202
+#  mchKey: c976503d34ca432c601361f969fd8d85
+#  keyPath: /var/wexin_cert/h5.p12
 #logging:
 #  pattern:
 #    console: "%d -%msg%n"

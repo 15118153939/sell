@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
 //如果订单不存在，则抛一个 订单不存在的异常
         if (orderMaster == null) {
-            throw new SellException(ResultEnum.ORDER_NOT_EXITST);
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
 
         }
 //        订单商品
@@ -217,7 +217,7 @@ public class OrderServiceImpl implements OrderService {
 //        copy 对象属性
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        OrderMaster updateResult =orderMasterRepository.save(orderMaster);
+        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
 //更新失败抛异常
         if (updateResult == null) {
             log.error("【完结订单】更新失败,orderMaster={}", orderMaster);
@@ -228,7 +228,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     *
      * @param orderDTO
      * @return
      */
@@ -241,8 +240,8 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
 //        判断支付状态
-        if (!PayStatusEnum.WAIT.getCode().equals(orderDTO.getPayStatus())){
-            log.error("【订单支付完成】订单支付状态不真确，orderDTO={}",orderDTO);
+        if (!PayStatusEnum.WAIT.getCode().equals(orderDTO.getPayStatus())) {
+            log.error("【订单支付完成】订单支付状态不真确，orderDTO={}", orderDTO);
             throw new SellException(ResultEnum.ORDER_PAY_STATUS_ERROR);
         }
 
@@ -253,12 +252,23 @@ public class OrderServiceImpl implements OrderService {
 //        copy 对象属性
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        OrderMaster updateResult =orderMasterRepository.save(orderMaster);
+        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
 //更新失败抛异常
         if (updateResult == null) {
             log.error("【订单支付完成】更新失败,orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FILE);
         }
         return orderDTO;
+    }
+
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+//转换一下，得到orderDTO
+        List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
+
+        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOList, pageable, orderMasterPage.getTotalElements());
+
+        return orderDTOPage;
     }
 }

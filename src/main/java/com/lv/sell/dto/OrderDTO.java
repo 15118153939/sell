@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lv.sell.dataobject.OrderDetail;
 import com.lv.sell.enums.OrderStatusEnum;
 import com.lv.sell.enums.PayStatusEnum;
+import com.lv.sell.utils.EnumUtil;
 import com.lv.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
+import org.apache.commons.lang3.EnumUtils;
 
 import javax.persistence.Id;
 import java.math.BigDecimal;
@@ -79,5 +81,19 @@ public class OrderDTO {
 
 
     List<OrderDetail> orderDetailList = new ArrayList<>();
+
+    /**
+     * 获取枚举
+     * @return
+     */
+    @JsonIgnore //转json时忽略此方法
+    public OrderStatusEnum getOrderStatusEnum(){
+        return OrderStatusEnum.getOrderStatusEnum(this.orderStatus);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum(){
+        return EnumUtil.getByCode(payStatus,PayStatusEnum.class);
+    }
 
 }
