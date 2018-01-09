@@ -14,12 +14,22 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  redis:
+    host: 192.168.1.114
+    port: 6379
+#    password:
 server:
   context-path: /sell
   port: 8080
 wechat:
   mpAppId: wx6e4afca43ca02334
   mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
+
+projectUrl:
+  wechatMpAuthorize: http://lvmingliang.nat300.top
+  wechatOpenAuthorize: http://lvmingliang.nat300.top
+  sell: http://lvmingliang.nat300.top
+
 #wechat:
 #  mpAppId: wx6e4afca43ca02334
 #  mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1

@@ -9,11 +9,13 @@ import com.lv.sell.dto.OrderDTO;
 import com.lv.sell.enums.OrderStatusEnum;
 import com.lv.sell.enums.PayStatusEnum;
 import com.lv.sell.enums.ResultEnum;
+import com.lv.sell.exception.ResponseBankException;
 import com.lv.sell.exception.SellException;
 import com.lv.sell.repository.OrderDetailRepository;
 import com.lv.sell.repository.OrderMasterRepository;
 import com.lv.sell.service.OrderService;
 import com.lv.sell.service.ProductService;
+import com.lv.sell.service.WebSocket;
 import com.lv.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -51,6 +53,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+
+    /**
+     * 创建订单的时候给websocket发送信息
+     */
+    @Autowired
+    private WebSocket webSocket;
     /***
      * 创建订单：
      *
@@ -71,6 +79,8 @@ public class OrderServiceImpl implements OrderService {
 
             if (productInfo == null) {
                 throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+//                需要自定义返回错误码
+//                throw new ResponseBankException();
             }
 
 //        2.计算订单总价
@@ -109,6 +119,11 @@ public class OrderServiceImpl implements OrderService {
 
         productService.decreaseStock(cartDTOList);
 
+        /**
+         *第四
+         */
+        //发送websocket消息
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }

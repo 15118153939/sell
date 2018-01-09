@@ -44,6 +44,8 @@ public enum  ResultEnum {
 
     LOGIN_FAIL(25, "登录失败, 登录信息不正确"),
 
+    PASSWORD_FAIL(27,"登陆失败，密码错误"),
+
     LOGOUT_SUCCESS(26, "登出成功"),
     ;
 
