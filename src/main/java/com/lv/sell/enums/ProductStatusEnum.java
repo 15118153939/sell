@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @Description
  **/
 @Getter
-public enum ProductStatusEnum {
+public enum ProductStatusEnum implements CodeEnum  {
     UP(0,"在架"),
     DOWN(1,"下架");
 

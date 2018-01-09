@@ -60,14 +60,14 @@ List<ProductVO> productVOList = new ArrayList<>();
 //        遍历类目
         for (ProductCategory productCategory:productCategoryList){
             ProductVO productVO = new ProductVO();
-            productVO.setCategoryType(productCategory.getCategoryTyep());
+            productVO.setCategoryType(productCategory.getCategoryType());
             productVO.setCategoryName(productCategory.getCategoryName());
 
 
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
             for (ProductInfo productInfo :productInfoList){
 //                spring
-                if(productInfo.getCategoryType().equals(productCategory.getCategoryTyep())){
+                if(productInfo.getCategoryType().equals(productCategory.getCategoryType())){
                     ProductInfoVO productInfoVO = new ProductInfoVO();
                     BeanUtils.copyProperties(productInfo,productInfoVO);
                     productInfoVOList.add(productInfoVO);

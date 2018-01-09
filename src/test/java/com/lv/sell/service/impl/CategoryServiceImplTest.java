@@ -53,7 +53,7 @@ public class CategoryServiceImplTest {
 
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryName("男生专属");
-        productCategory.setCategoryTyep(2);
+        productCategory.setCategoryType(2);
         categoryService.save(productCategory);
 //        跳到下一行，
 //        Assert.assertNotEquals();

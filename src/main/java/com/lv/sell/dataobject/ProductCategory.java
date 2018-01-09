@@ -26,12 +26,16 @@ public class ProductCategory {
     /**类目名称*/
     private String categoryName;
     /**类目编号.*/
-    private Integer categoryTyep;
+    private Integer categoryType;
     /**创建时间*/
     private Date createTime;
     /**更改时间*/
     private Date updateTime;
 
     public ProductCategory() {
+    }
+    public ProductCategory(String categoryName, Integer categoryType) {
+        this.categoryName = categoryName;
+        this.categoryType = categoryType;
     }
 }

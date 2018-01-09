@@ -37,10 +37,17 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     public void addOne() {
+//        ProductCategory productCategory = new ProductCategory();
+//        productCategory.setCategoryName("宅男必备");
+//        productCategory.setCategoryType(4);
+//        repository.save(productCategory);
+
+
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("宅男必备");
-        productCategory.setCategoryTyep(4);
+        productCategory.setCategoryName("美味实惠");
+        productCategory.setCategoryType(4);
         repository.save(productCategory);
+
     }
 
     @Test
@@ -48,7 +55,7 @@ public class ProductCategoryRepositoryTest {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategoryId(2);
         productCategory.setCategoryName("少女系列");
-        productCategory.setCategoryTyep(3);
+        productCategory.setCategoryType(3);
         ProductCategory category = repository.save(productCategory);
 
         Assert.assertNotNull(category);
@@ -56,10 +63,10 @@ public class ProductCategoryRepositoryTest {
     }
 
     @Test
-    public void findByCategoryTyepInTest() {
+    public void findByCategoryTypeInTest() {
 
         List<Integer> list = Arrays.asList(2, 3);
-        List<ProductCategory> productCategoryList = repository.findByCategoryTyepIn(list);
+        List<ProductCategory> productCategoryList = repository.findByCategoryTypeIn(list);
         Assert.assertNotEquals(0,productCategoryList.size());
         for (int i=0;i< productCategoryList.size();i++){
             System.out.println(productCategoryList.get(i).toString());
