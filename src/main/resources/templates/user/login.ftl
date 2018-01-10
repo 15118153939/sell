@@ -2,7 +2,7 @@
 
 <#include "../common/header.ftl">
 
-<body background="/sell/img/login/bg.jpg">
+<body background="/sell/img/login/mybg.jpg">
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
