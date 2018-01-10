@@ -1,0 +1,59 @@
+spring:
+  freemarker:
+    cache: false
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+#    password: Mingliang520
+#    url: jdbc:mysql://localhost/sell?characterEncoding=utf-8&userSSL=false
+#    characterEncoding=utf-8&userSSL=false 防止中文乱码，以及协议安全性问题
+    url: jdbc:mysql://192.168.1.114/sell?characterEncoding=utf-8&userSSL=false
+  jackson:
+    default-property-inclusion: non_null
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  redis:
+    host: 192.168.1.114
+    port: 6379
+#    password:
+server:
+  context-path: /sell
+  port: 8080
+
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+##  path: /var/log/tomcat/
+#  file: /var/log/tomcat/sell.log
+#  level:
+#    com.imooc.LoggerTest: debug
+
+wechat:
+  mpAppId: wx6e4afca43ca02334
+  mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
+
+projectUrl:
+  wechatMpAuthorize: http://lvmingliang.nat300.top
+  wechatOpenAuthorize: http://lvmingliang.nat300.top
+  sell: http://lvmingliang.nat300.top
+
+
+#mybatis 配置-路径
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+#wechat:
+#  mpAppId: wx6e4afca43ca02334
+#  mpAppSecret: 1b70f39a8e2c34746e0b8d33d4f126a1
+#  mchId: 1409146202
+#  mchKey: c976503d34ca432c601361f969fd8d85
+#  keyPath: /var/wexin_cert/h5.p12
+#logging:
+#  pattern:
+#    console: "%d -%msg%n"
+#  file: /sell.log
+#  level:
+#    com.lv.sell.LoggerTest: debug
+##  path: /lvlog/
