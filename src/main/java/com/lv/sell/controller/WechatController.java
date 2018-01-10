@@ -65,7 +65,7 @@ public class WechatController {
     }
 
     @GetMapping("/test")
-    public void getTest(){
+    public void getTest() {
         log.info("---------test----------------");
     }
 }

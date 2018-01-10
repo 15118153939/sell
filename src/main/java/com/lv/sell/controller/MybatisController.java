@@ -31,10 +31,10 @@ public class MybatisController {
      * @return
      */
     @GetMapping("/list")
-    public ResultVO list(){
-        List<ProductCategory> categoryList= mapper.findAll();
+    public ResultVO list() {
+        List<ProductCategory> categoryList = mapper.findAll();
 
-        return  ResultVOUtil.success(categoryList);
+        return ResultVOUtil.success(categoryList);
     }
 
 

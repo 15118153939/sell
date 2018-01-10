@@ -30,7 +30,7 @@ public class PayController {
     @GetMapping("create")
     public ModelAndView create(@RequestParam("orderId") String orderId,
                                @RequestParam("returnUrl") String returnUrl,
-                               Map<String,Object> map){
+                               Map<String, Object> map) {
 
 //        1:查询订单
         OrderDTO orderDTO = orderService.findOne(orderId);
@@ -46,8 +46,7 @@ public class PayController {
 
         map.put("payResponse", payResponse);
         map.put("returnUrl", returnUrl);
-        return new ModelAndView("/pay/create",map);
-
+        return new ModelAndView("/pay/create", map);
 
 
     }

@@ -32,20 +32,20 @@ public class HttpAspect {
 //        logger.info("---");
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request =attributes.getRequest();
+        HttpServletRequest request = attributes.getRequest();
 //        url
-        logger.info("url={}",request.getRequestURL());
+        logger.info("url={}", request.getRequestURL());
 //        method
-        logger.info("method={}",request.getMethod());
+        logger.info("method={}", request.getMethod());
 //        ip
-        logger.info("ip={}",request.getRemoteAddr());
+        logger.info("ip={}", request.getRemoteAddr());
 //        path
-        logger.info("path={}",request.getServletPath());
-        logger.info("LocalAddr={}",request.getLocalAddr());
+        logger.info("path={}", request.getServletPath());
+        logger.info("LocalAddr={}", request.getLocalAddr());
 //        类方法
-        logger.info("class_method={}",joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName());
+        logger.info("class_method={}", joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 //    参数
-        logger.info("args={}",joinPoint.getArgs());
+        logger.info("args={}", joinPoint.getArgs());
     }
 
     @After("log()")
@@ -55,10 +55,11 @@ public class HttpAspect {
 
     /**
      * 返回对象
+     *
      * @param object
      */
-    @AfterReturning(returning = "object",pointcut = "log()")
-    public void doAfterReturning(Object object){
-        logger.info("response={}",object!=null?object.toString():object);
+    @AfterReturning(returning = "object", pointcut = "log()")
+    public void doAfterReturning(Object object) {
+        logger.info("response={}", object != null ? object.toString() : object);
     }
 }

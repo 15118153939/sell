@@ -3,6 +3,8 @@ package com.lv.sell.vo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Author lvmingliang_glut@163.com
  * @Date 2017/12/22 10:33
@@ -11,7 +13,10 @@ import lombok.Data;
  **/
 @Data
 //@JsonInclude(JsonInclude.Include.NON_NULL)  //如果有熟悉为null,则返回的json去掉此属性吧。
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable{
+
+
+    private static final long serialVersionUID = -3884627445426491352L;
     /***错误码*/
     private Integer code;
     /***提示信息*/

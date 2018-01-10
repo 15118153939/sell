@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Bean;
 /**
  * @Author lvmingliang_glut@163.com
  * @Date 2018/1/9 13:37
- * @Description
- * 微信开放平台
+ * @Description 微信开放平台
  **/
 public class WechatOpenConfig {
 
@@ -27,6 +26,7 @@ public class WechatOpenConfig {
 
     /**
      * 配置
+     *
      * @return
      */
     @Bean

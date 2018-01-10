@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -109,6 +110,7 @@ public class SellerProductController {
 
     /**
      * 展示
+     *
      * @param productId
      * @param map
      * @return
@@ -129,13 +131,16 @@ public class SellerProductController {
 
     /**
      * 新增/修改
+     *
      * @param form
      * @param bindingResult
      * @param map
      * @return
      */
     @PostMapping("/save")
-//    @CacheEvict(cacheNames = "product")
+
+//    @CachePut(cacheNames = "product",key="123") :返回的内容写到redis
+    @CacheEvict(cacheNames = "product") //驱逐，清除
     public ModelAndView save(@Valid ProductForm form,
                              BindingResult bindingResult,
                              Map<String, Object> map) {

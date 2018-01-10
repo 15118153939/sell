@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 public class WeixinController {
 
     @GetMapping("/auth")
-    public void auth(@RequestParam("code") String code){
+    public void auth(@RequestParam("code") String code) {
 
         /***
          * 1:获取ocde
@@ -26,10 +26,10 @@ public class WeixinController {
          */
         log.info("进入weixin auth...方法");
         log.info(code);
-        String url ="";
+        String url = "";
         RestTemplate restTemplate = new RestTemplate();
-        String response = restTemplate.getForObject(url,String.class);
-        log.info("response={}",response);
+        String response = restTemplate.getForObject(url, String.class);
+        log.info("response={}", response);
 //
 
     }

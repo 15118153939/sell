@@ -9,6 +9,7 @@ import com.lv.sell.vo.ProductVO;
 import com.lv.sell.vo.ResultVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,8 @@ public class BuyerProductController {
     private CategoryService categoryService;
 
     @GetMapping("/list")
-    public ResultVO list() {
+    @Cacheable(cacheNames = "product", key = "#sellerId", condition = "#sellerId.length() > 3", unless = "#result.getCode() != 0")//如果这个条件成立，则进行缓存，unless,如果不，则缓存
+    public ResultVO list(String sellerId) {
 //        1.查询所有上架商品
         List<ProductInfo> productInfoList = productService.findAll();
 //        2.查询类目（一次性查询）
@@ -51,25 +53,24 @@ public class BuyerProductController {
                 map(e -> e.getCategoryType()).
                 collect(Collectors.toList());
 
-        List<ProductCategory> productCategoryList=categoryService.findByCategoryTypeIn(categoryTypeList);
-
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
 
         //        3：数据拼装
-List<ProductVO> productVOList = new ArrayList<>();
+        List<ProductVO> productVOList = new ArrayList<>();
 //        遍历类目
-        for (ProductCategory productCategory:productCategoryList){
+        for (ProductCategory productCategory : productCategoryList) {
             ProductVO productVO = new ProductVO();
             productVO.setCategoryType(productCategory.getCategoryType());
             productVO.setCategoryName(productCategory.getCategoryName());
 
 
             List<ProductInfoVO> productInfoVOList = new ArrayList<>();
-            for (ProductInfo productInfo :productInfoList){
+            for (ProductInfo productInfo : productInfoList) {
 //                spring
-                if(productInfo.getCategoryType().equals(productCategory.getCategoryType())){
+                if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
                     ProductInfoVO productInfoVO = new ProductInfoVO();
-                    BeanUtils.copyProperties(productInfo,productInfoVO);
+                    BeanUtils.copyProperties(productInfo, productInfoVO);
                     productInfoVOList.add(productInfoVO);
                 }
             }
@@ -78,8 +79,6 @@ List<ProductVO> productVOList = new ArrayList<>();
         }
 
         return ResultVOUtil.success(productVOList);
-
-
 
 
     }

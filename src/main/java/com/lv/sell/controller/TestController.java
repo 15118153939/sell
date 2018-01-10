@@ -25,7 +25,7 @@ public class TestController {
     }
 
     @RequestMapping("/demo2")
-    public ModelAndView demo2(){
+    public ModelAndView demo2() {
 
 
         ModelAndView mv = new ModelAndView();
@@ -33,14 +33,14 @@ public class TestController {
 
 //        mv.setView("/pay/demo");
         mv.setViewName("/pay/demo");
-        return  mv;
+        return mv;
 
     }
 
     @RequestMapping("/demo3")
-    public ModelAndView demo3(){
+    public ModelAndView demo3() {
         ModelAndView mv = new ModelAndView("pay/create");
-        mv.addObject("name","我日你现任");
+        mv.addObject("name", "我日你现任");
         return mv;
     }
 

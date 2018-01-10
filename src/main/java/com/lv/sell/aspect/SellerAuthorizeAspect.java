@@ -21,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Author lvmingliang_glut@163.com
  * @Date 2018/1/9 15:13
- * @Description
- * AOP实现身份验证
+ * @Description AOP实现身份验证
  **/
 @Aspect
 @Component
@@ -35,17 +34,20 @@ public class SellerAuthorizeAspect {
 
     /**
      * 切入点：所有卖家Seller开头的的操作
-      */
+     */
     @Pointcut("execution(public * com.lv.sell.controller.Seller*.*(..))" +
             "&& !execution(public * com.lv.sell.controller.SellerUserController.*(..))")
-    public void verify(){};
+    public void verify() {
+    }
+
+    ;
 
 
     /**
      * 在切入点之前：
      */
     @Before("verify()")
-    public void doVerify(){
+    public void doVerify() {
 //        1:获取 HttpServletRequest
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -55,7 +57,7 @@ public class SellerAuthorizeAspect {
 //如果cookie没有值，则没有登录
         if (cookie == null) {
             log.warn("[登录校验]Cookie中查询不到token");
-               throw new SellerAuthorizeException();
+            throw new SellerAuthorizeException();
         }
 
         //去redis里查询

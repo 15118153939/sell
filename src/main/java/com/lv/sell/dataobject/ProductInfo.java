@@ -8,11 +8,13 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * 商品
+ *
  * @Author lvmingliang_glut@163.com
  * @Date 2017/12/21 22:02
  * @Description
@@ -20,27 +22,41 @@ import java.util.Date;
 @Entity
 @Data
 @DynamicUpdate //时间自动更新
-public class ProductInfo {
+public class ProductInfo implements Serializable {
 
+
+    private static final long serialVersionUID = -2396160969439024302L;
     @Id
     private String productId;
     /***
      * 名字
      */
     private String productName;
-    /**单价*/
+    /**
+     * 单价
+     */
     private BigDecimal productPrice;
-    /**库存**/
+    /**
+     * 库存
+     **/
     private Integer productStock;
-    /**商品小图，是一个链接地址*/
+    /**
+     * 商品小图，是一个链接地址
+     */
     private String productIcon;
 
-    /**状态：0正常，1下架*/
+    /**
+     * 状态：0正常，1下架
+     */
     private Integer productStatus = ProductStatusEnum.UP.getCode();
 
-    /**类目编号。做关联*/
+    /**
+     * 类目编号。做关联
+     */
     private Integer categoryType;
-    /**商品描述*/
+    /**
+     * 商品描述
+     */
     private String productDescription;
 
     /**

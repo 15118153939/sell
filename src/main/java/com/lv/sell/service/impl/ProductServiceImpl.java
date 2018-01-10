@@ -8,6 +8,9 @@ import com.lv.sell.exception.SellException;
 import com.lv.sell.repository.ProductInfoRepository;
 import com.lv.sell.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,11 +24,13 @@ import java.util.List;
  * @Description
  **/
 @Service
+@CacheConfig(cacheNames = "prodcut")
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoRepository repository;
 
     @Override
+//    @Cacheable(key = "123")
     public ProductInfo findOne(String productId) {
         return repository.findOne(productId);
     }
@@ -41,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+//    @CachePut(key ="123")
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
     }
